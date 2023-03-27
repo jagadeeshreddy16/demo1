@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        #a{
+            background-repeat: no-repeat;
+            background-size: 100% 100vh;
+            display: flex;
+            justify-content: center;
+        }
+        #time{
+            font-size: 300px;
+            position: absolute;
+            top: -150px;
+            color: cornflowerblue;
+            text-shadow: 5px 5px 5px black;
+            font-family: 'Righteous', cursive;
+        }
+        #date{
+            font-size: 150px;
+            position: absolute;
+            top:300px;
+            color: forestgreen;
+            text-shadow: 5px 5px 5px black;
+            font-family: 'Righteous', cursive;
+        }
+        #day{
+            font-size: 100px;
+            position: absolute;
+            bottom: 0px;
+            color: crimson;
+            text-shadow: 5px 5px 5px black;
+            font-family: 'Righteous', cursive;
+        }
+        #sec{
+            font-size: 500px;
+            position: absolute;
+            color: rgba(255, 217, 0, 0.71);
+            z-index: -1;
+            top: -250px;
+            text-shadow: 5px 5px 5px black;
+            font-family: 'Righteous', cursive;
+        }
+        #greet{
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.942);
+            z-index: 3;
+            position: fixed;
+            top: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size:150px ;
+            text-shadow: 5px 5px 5px black;
+            color: white;
+            letter-spacing: 5px;
+            word-spacing: 15px;
+        }
+        #but{
+            font-size: 40px;
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            background-color: transparent;
+            border: none;
+            text-shadow: 0px 0px 2px black;
+            transition: rotate 0.8s;
+            color: white;
+        }
+        #but:hover{
+            rotate: 360deg;
+        }
+        #aud{
+            position: relative;
+            left: 100px;
+        }
+    </style>
+</head>
+<body id="a" onload="greet()">
+    <div id="greet">
+        <h1 id="greetmess"></h1>
+        <button id="but" onclick="nogreet()">X</button>
+    </div>
+    <h1 id="time"></h1>
+    <h1 id="date"></h1>
+    <h1 id="day"></h1>
+    <h1 id="sec"></h1>
+    <!-- <input type="time" id="alarm">
+    <video id="aud" controls autoplay loop ></video> -->
+    <script>
+        function nogreet()
+        {
+            document.getElementById("greet").setAttribute("style","display:none")
+        }
+        function greet()
+        {
+            var date=new Date();
+            var hh=date.getHours();
+            if(hh>=0 && hh<=12)
+            {
+                document.getElementById("greetmess").innerHTML="Good Morning!!!"
+            }
+            else if(hh>=13 && hh<=15)
+            {
+                document.getElementById("greetmess").innerHTML="Good Afternoon!!!"
+            }
+            else if(hh>=16 && hh<=20)
+            {
+                document.getElementById("greetmess").innerHTML="Good Evening!!!"
+            }
+            else
+            {
+                document.getElementById("greetmess").innerHTML="Good Night!!!"
+            }
+            timeAndDate()
+        }
+        function timeAndDate()
+        {
+        var date=new Date();
+        var hh=date.getHours();
+        var mm=date.getMinutes();
+        var ss=date.getSeconds();
+        var dt=date.getDate();
+        var mon=date.getMonth();
+        var yy=date.getFullYear();
+        var day=date.getDay();
+        var am_pm="Am"
+        if(hh>=12)
+        { 
+            if(hh>=13)
+            {
+                hh-=12
+                am_pm="Pm"
+            }
+        }
+        switch(mon)
+        {
+            case 0:
+                mon="Jan"
+                break;
+            case 1:
+                mon="Feb"
+                break;
+            case 2:
+                mon="Mar"
+                break;
+            case 3:
+                mon="Apr"
+                break;
+            case 4:
+                mon="May"
+                break;
+            case 5:
+                mon="Jun"
+                break;
+            case 6:
+                mon="Jul"
+                break;
+            case 7:
+                mon="Aug"
+                break;
+            case 8:
+                mon="Sep"
+                break;
+            case 9:
+                mon="Oct"
+                break;
+            case 10:
+                mon="Nov"
+                break;
+            case 11:
+                mon="Dec"
+                break;    
+        }
+        switch(day)
+        {
+            case 0:
+                day="Sunday"
+                document.getElementById("a").style.backgroundImage="url(./clockimages/sun.png)"
+                break;
+            case 1:
+                day="Monday"
+                document.getElementById("a").style.backgroundImage="url(./clockimages/mon.jpg)"
+                break;
+            case 2:
+                day="Tuesday"
+                document.getElementById("a").style.backgroundImage="url(./clockimages/tue.jpg)"
+                break;
+            case 3:
+                day="Wednesday"
+                document.getElementById("a").style.backgroundImage="url(./clockimages/wed.jpg)"
+                break;
+            case 4:
+                day="Thursday"
+                document.getElementById("a").style.backgroundImage="url(./clockimages/thu.jpg)"
+                break;
+            case 5:
+                day="Friday"
+                document.getElementById("a").style.backgroundImage="url(./clockimages/fri.jpg)"
+                break;
+            case 6:
+                day="Saturday"
+                document.getElementById("a").style.backgroundImage="url(./clockimages/sat.jpg)"
+                break;
+        }
+         var totaltime=hh+":"+mm+" "+am_pm
+         document.getElementById("time").innerHTML=totaltime
+         var totaldate=dt+"/"+mon+"/"+yy
+         document.getElementById("date").innerHTML=totaldate
+         document.getElementById("day").innerHTML=day
+         document.getElementById("sec").innerHTML=ss
+         console.log(hh,am_pm,mm,ss,dt,mon,yy,day)
+         var update=setTimeout(function(){timeAndDate()},1000)
+    }
+    var closetheclose=setTimeout(nogreet,5000)
+    </script>
+</body>
+</html>
